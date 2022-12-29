@@ -41,6 +41,12 @@ public Movie getMovieByName(String name){
            return movieDB.get(name);
        return null;
 }
+    public Director getDirectorByName(String name){
+
+        if(directorDB.containsKey(name))
+            return directorDB.get(name);
+        return null;
+    }
 public List getMoviesByDirectorName(String name){
        List<String> l = new ArrayList<>();
 for(String s: mapDB.keySet()){
@@ -49,12 +55,27 @@ for(String s: mapDB.keySet()){
 }
 return l;
 }
-public Director getDirectorByName(String name){
-
-        if(directorDB.containsKey(name))
-            return directorDB.get(name);
-        return null;
-    }
+public List findAllMovies(){
+       List<String> l = new ArrayList<>();
+       for(String s:movieDB.keySet()){
+           l.add(s);
+       }
+       return l;
+}
+public String deleteDirectorByName(String name){
+       for(String s:mapDB.keySet()){
+           if(mapDB.get(s).equals(name))
+               mapDB.remove(s);
+       }
+       return "success";
+}
+public String deleteAllDirectors(){
+       for(String s:mapDB.keySet()){
+           if(!mapDB.get(s).equals(null))
+               mapDB.remove(s);
+       }
+       return "success";
+}
 //public class Pair{
 //       String movieName;
 //       String directorname;

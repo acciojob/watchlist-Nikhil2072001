@@ -46,5 +46,22 @@ public ResponseEntity<Director> getDirectorByName(@PathVariable("name") String n
      // List l=;
       return new ResponseEntity<>(movieService.getMoviesByDirectorName(name),HttpStatus.OK);
 }
+@GetMapping("/movies/get-all-movies")
+    public ResponseEntity<List> findAllMovies(){
+      return new ResponseEntity<>(movieService.findAllMovies(),HttpStatus.CREATED);
+}
+@DeleteMapping("/movies/delete-director-by-name")
+    public ResponseEntity<String> deleteDirectorByName(@RequestParam("name") String name){
+      String s = movieService.deleteDirectorByName(name);
+      return new ResponseEntity<>(s,HttpStatus.CREATED);
+}
+@DeleteMapping("/movies/delete-all-directors")
+public ResponseEntity<String> deleteAllDirectors(){
+      String s = movieService.deleteAllDirectors();
+      return new ResponseEntity<>(s,HttpStatus.CREATED);
+}
+
+
+
 
 }

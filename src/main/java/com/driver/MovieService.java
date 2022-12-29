@@ -28,4 +28,13 @@ public class MovieService {
     public List getMoviesByDirectorName(String name){
         return movieRepository.getMoviesByDirectorName(name);
     }
+    public List findAllMovies(){
+        return movieRepository.findAllMovies();
+    }
+    public String deleteDirectorByName(String name){
+        return movieRepository.deleteDirectorByName(name);
+    }
+    public String deleteAllDirectors(){
+        return movieRepository.deleteAllDirectors();
+    }
 }
