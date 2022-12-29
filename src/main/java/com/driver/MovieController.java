@@ -51,7 +51,7 @@ public ResponseEntity<Director> getDirectorByName(@PathVariable String name){
 }
 @GetMapping("/movies/get-movies-by-director-name/{director}")
     public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable String director){
-    List<String> movies = movieService.getMoviesByDirectorName();
+    List<String> movies = movieService.getMoviesByDirectorName(director);
     return new ResponseEntity<>(movies,HttpStatus.CREATED);
 }
 @GetMapping("/movies/get-all-movies")

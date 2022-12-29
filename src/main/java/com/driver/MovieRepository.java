@@ -93,13 +93,5 @@ public String deleteAllDirectors(){
        }
        return "success";
 }
-//public class Pair{
-//       String movieName;
-//       String directorname;
-//
-//    public Pair(String movieName, String directorname) {
-//        this.movieName = movieName;
-//        this.directorname = directorname;
-//    }
-//}
+
 }
