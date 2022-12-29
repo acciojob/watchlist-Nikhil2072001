@@ -4,7 +4,9 @@ public class Movie {
 public String name;
 public int durationInMinutes;
 public double imdbRating;
+public Movie() {
 
+}
     public Movie(String name, int durationInMinutes, double imdbRating) {
         this.name = name;
         this.durationInMinutes = durationInMinutes;

@@ -8,12 +8,20 @@ import java.util.List;
 
 @Repository
 public class MovieRepository {
-   HashMap<String,Movie> movieDB = new HashMap<>();
-    HashMap<String,Director> directorDB= new HashMap<>();
-  HashMap<String,String> mapDB = new HashMap<>();
-  HashMap<String,List<String>> movieDirectorDB = new HashMap<>();
+   HashMap<String,Movie> movieDB;
+    HashMap<String,Director> directorDB;
+//  HashMap<String,String> mapDB = new HashMap<>();
+  HashMap<String,List<String>> movieDirectorDB;
 
-   public  String addMovie(Movie movie){
+    public MovieRepository() {
+        this.movieDB = new HashMap<String, Movie>();
+        this.directorDB = new HashMap<String, Director>();
+
+        this.movieDirectorDB = new HashMap<String, List<String>>();
+
+    }
+
+    public  String addMovie(Movie movie){
 
         String key = movie.name;
         //Add it to the studentDb
