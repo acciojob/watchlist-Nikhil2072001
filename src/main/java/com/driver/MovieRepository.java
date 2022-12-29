@@ -11,6 +11,7 @@ public class MovieRepository {
    HashMap<String,Movie> movieDB = new HashMap<>();
     HashMap<String,Director> directorDB= new HashMap<>();
   HashMap<String,String> mapDB = new HashMap<>();
+  HashMap<String,List<String>> movieDirectorDB = new HashMap<>();
 
    public  String addMovie(Movie movie){
 
@@ -30,12 +31,23 @@ public class MovieRepository {
         return "success ";
 
     }
-public String addMovieDirectorPair(String movieName,String directorName){
 //Pair p = new Pair(movieName,directorName);
 
-mapDB.put(movieName,directorName);
-    return "success ";
+
+public String addMovieDirectorPair(String movieName,String directorName){
+       List<String> l = new ArrayList<>();
+       if(movieDirectorDB.containsKey(directorName)){
+           l= movieDirectorDB.get(directorName);
+           l.add(movieName);
+           movieDirectorDB.put(directorName,l);
+       }else{
+           l.add(movieName);
+           movieDirectorDB.put(directorName,l);
+       }
+       return "success";
 }
+
+
 public Movie getMovieByName(String name){
        if(movieDB.containsKey(name))
            return movieDB.get(name);
@@ -49,9 +61,9 @@ public Movie getMovieByName(String name){
     }
 public List getMoviesByDirectorName(String name){
        List<String> l = new ArrayList<>();
-for(String s: mapDB.keySet()){
-    if(mapDB.get(s).equals(name))
-        l.add(s);
+if(movieDirectorDB.containsKey(name)){
+    l=movieDirectorDB.get(name);
+    return l;
 }
 return l;
 }
@@ -63,16 +75,13 @@ public List findAllMovies(){
        return l;
 }
 public String deleteDirectorByName(String name){
-       for(String s:mapDB.keySet()){
-           if(mapDB.get(s).equals(name))
-               mapDB.remove(s);
-       }
+      if(movieDirectorDB.containsKey(name))
+          movieDirectorDB.remove(name);
        return "success";
 }
 public String deleteAllDirectors(){
-       for(String s:mapDB.keySet()){
-           if(!mapDB.get(s).equals(null))
-               mapDB.remove(s);
+       for(String s:movieDirectorDB.keySet()){
+           movieDirectorDB.remove(s);
        }
        return "success";
 }
