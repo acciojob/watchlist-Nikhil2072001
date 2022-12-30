@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,10 +32,10 @@ public class MovieService {
     public List findAllMovies(){
         return movieRepository.findAllMovies();
     }
-    public String deleteDirectorByName(String name){
-        return movieRepository.deleteDirectorByName(name);
+    public void deleteDirectorByName(String director) {
+        movieRepository.deleteDirector(director);
     }
-    public String deleteAllDirectors(){
-        return movieRepository.deleteAllDirectors();
+    public void deleteAllDirectors(){
+        movieRepository.deleteAllDirector();
     }
 }

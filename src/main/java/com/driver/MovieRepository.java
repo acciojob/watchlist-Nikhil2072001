@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 @Repository
@@ -82,16 +83,53 @@ public List findAllMovies(){
        }
        return l;
 }
-public String deleteDirectorByName(String name){
-      if(movieDirectorDB.containsKey(name))
-          movieDirectorDB.remove(name);
-       return "success";
-}
-public String deleteAllDirectors(){
-       for(String s:movieDirectorDB.keySet()){
-           movieDirectorDB.remove(s);
-       }
-       return "success";
-}
+    public void deleteDirector(String director){
+
+        List<String> movies = new ArrayList<String>();
+        if(movieDirectorDB.containsKey(director)){
+            //1. Find the movie names by director from the pair
+            movies = movieDirectorDB.get(director);
+
+            //2. Deleting all the movies from movieDb by using movieName
+            for(String movie: movies){
+                if(movieDB.containsKey(movie)){
+                    movieDB.remove(movie);
+                }
+            }
+
+            //3. Deleteing the pair
+            movieDirectorDB.remove(director);
+        }
+
+        //4. Delete the director from directorDb.
+        if(directorDB.containsKey(director)){
+            directorDB.remove(director);
+        }
+    }
+    public void deleteAllDirector(){
+
+        HashSet<String> moviesSet = new HashSet<String>();
+
+        //Deleting the director's map
+        directorDB = new HashMap<>();
+
+        //Finding out all the movies by all the directors combined
+        for(String director: movieDirectorDB.keySet()){
+
+            //Iterating in the list of movies by a director.
+            for(String movie: movieDirectorDB.get(director)){
+                moviesSet.add(movie);
+            }
+        }
+
+        //Deleting the movie from the movieDb.
+        for(String movie: moviesSet){
+            if(movieDB.containsKey(movie)){
+                movieDB.remove(movie);
+            }
+        }
+        //clearing the pair.
+        movieDirectorDB = new HashMap<>();
+    }
 
 }

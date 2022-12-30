@@ -64,13 +64,13 @@ public ResponseEntity<Director> getDirectorByName(@PathVariable String name){
 }
 @DeleteMapping("/movies/delete-director-by-name")
     public ResponseEntity<String> deleteDirectorByName(@RequestParam("name") String director){
-      String s = movieService.deleteDirectorByName(director);
-      return new ResponseEntity<>(s,HttpStatus.CREATED);
+      movieService.deleteDirectorByName(director);
+      return new ResponseEntity<>("success",HttpStatus.CREATED);
 }
 @DeleteMapping("/movies/delete-all-directors")
 public ResponseEntity<String> deleteAllDirectors(){
-      String s = movieService.deleteAllDirectors();
-      return new ResponseEntity<>(s,HttpStatus.CREATED);
+       movieService.deleteAllDirectors();
+      return new ResponseEntity<>("success",HttpStatus.CREATED);
 }
 
 
